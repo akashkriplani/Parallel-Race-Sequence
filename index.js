@@ -26,6 +26,21 @@ async function sequence() {
   return `sequence is done ${resp1} ${resp2} ${resp3}`
 }
 
-parallel().then(console.log);
-race().then(console.log);
-sequence().then(console.log);
+// parallel().then(console.log);
+// race().then(console.log);
+// sequence().then(console.log);
+
+// Promise settled
+
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 3000)
+})
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(reject, 2000)
+})
+
+// Returns the array with the promise resolve and reject status and reason. .allSettled() is a ES 2020 feature
+
+Promise.allSettled([promise1, promise2]).then((data) => console.log(data))
+
